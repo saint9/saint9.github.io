@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
   <title>GS</title>
   <script src="https://unpkg.com/jquery@3.5.1/dist/jquery.js"></script>
   <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
@@ -13,14 +14,32 @@
   <p>分享</p>
   <script>
     $(function () {
-      console.log($.fn.jquery)
+      const url = location.href.split('#')[0]
       $.ajax({
         type: 'post',
         url: 'http://10.40.220.116:8086/cxg/roadshowCenter/onlineExhibition/getJson',
-        dataType: 'jsonp',//数据类型为jsonp  
+        dataType: 'jsonp',//数据类型为jsonp
+        data: {
+          appId: 'wx78f040ec24e2aecc',
+          appsecret: 'da01694760fd1a8766f6455ea8d8cb9d',
+          url
+        },
         jsonp: 'jsonpCallback',//服务端用于接收callback调用的function名的参数  
         success: function (data) {
-          // $('#showcontent').text('Result:' + data.result)
+          wx.config({
+            debug: true,
+            appId: 'wx78f040ec24e2aecc',
+            timestamp: data.timestamp,
+            nonceStr: data.noncestr,
+            signature: data.signature,
+            jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone']
+          })
+
+          wx.ready(function () {
+            // console.log('dd')
+            alert('success')
+            // console.log(location.href.split('#')[0])
+          })
         },
         error: function () {
           alert('fail');
