@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,26 @@
   <script src="https://unpkg.com/jquery@3.5.1/dist/jquery.js"></script>
   <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 </head>
+
 <body>
   <p>分享</p>
+  <script>
+    $(function () {
+      console.log($.fn.jquery)
+      $.ajax({
+        type: 'post',
+        url: 'http://10.40.220.116:8086/cxg/roadshowCenter/onlineExhibition/getJson',
+        dataType: 'jsonp',//数据类型为jsonp  
+        jsonp: 'jsonpCallback',//服务端用于接收callback调用的function名的参数  
+        success: function (data) {
+          // $('#showcontent').text('Result:' + data.result)
+        },
+        error: function () {
+          alert('fail');
+        }
+      });
+    })
+  </script>
 </body>
+
 </html>
