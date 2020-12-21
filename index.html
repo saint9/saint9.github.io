@@ -14,7 +14,7 @@
   <p>分享</p>
   <script>
     $(function () {
-      const url = location.href.split('#')[0]
+      var url = location.href.split('#')[0]
       $.ajax({
         type: 'post',
         url: 'http://10.40.220.116:8086/cxg/roadshowCenter/onlineExhibition/getJson',
@@ -22,7 +22,7 @@
         data: {
           appId: 'wx78f040ec24e2aecc',
           appsecret: 'da01694760fd1a8766f6455ea8d8cb9d',
-          url
+          url: url
         },
         jsonp: 'jsonpCallback',//服务端用于接收callback调用的function名的参数  
         success: function (data) {
